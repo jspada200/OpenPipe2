@@ -29,8 +29,15 @@ class Settings(object):
             self.generateInitalSettings()
 
         with open(self.jsonSettingsFile) as f:
-            self.settings = json.load(f)
+            settings = json.load(f)
+
+        for key, val in settings.items():
+            setattr(self, key, val)
 
     def generateInitalSettings(self):
         """Generate the base project settings."""
         pass
+
+    def get(self, val, fallback):
+        """Get a value or return the fallback."""
+        return eval('self.' + val) or fallback

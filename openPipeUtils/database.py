@@ -2,6 +2,7 @@
 # Open Pipe
 # Utility classes for interacting with the DB.
 import sqlite3
+from datetime import datetime
 import os
 
 class Database(object):
@@ -11,7 +12,7 @@ class Database(object):
         """Set up object."""
         pass
 
-    def get_shots(self):
+    def get_shots_or_assets(self):
         """Get a list of all shots."""
         return []
 
@@ -47,6 +48,7 @@ class SQLiteDatabase(Database):
 
         # Build the shotlist table
         self.cursor.execute('CREATE TABLE shots (shotname STRING PRIMARY KEY)')
+        self.cursor.execute('CREATE TABLE assets (assetname STRING PRIMARY KEY)')
         self.connection.commit()
         self.connection.close()
 
@@ -57,10 +59,13 @@ class SQLiteDatabase(Database):
 
     # Query
 
-    def get_shots(self, keepOpen=False):
+    def get_shots_or_assets(self, keepOpen=False, assets=False):
         """Get a list of all shots."""
         self.connect()
-        self.cursor.execute('SELECT * from shots')
+        if assets:
+            self.cursor.execute('SELECT * from assets')
+        else:
+            self.cursor.execute('SELECT * from shots')
         all = self.cursor.fetchall()
         if not keepOpen:
             self.connection.close()
@@ -69,15 +74,24 @@ class SQLiteDatabase(Database):
     def get_shot_data(self, shot):
         """Get info for this shot."""
         shotdata = {}
+        asset = False
 
         self.connect()
         self.cursor.execute("SELECT * from shots WHERE shotname='{0}'".format(shot))
         info = self.cursor.fetchone()
         if not info:
+            asset = True
+            self.cursor.execute("SELECT * from assets WHERE assetname='{0}'".format(shot))
+            info = self.cursor.fetchone()
+
+        if not info:
             raise KeyError('No such shot {0} exists'.format(shot))
+
         shotdata['name'] = info[0]
-        shotdata['firstFrame'] = 0
-        shotdata['lastFrame'] = 100
+
+        if not asset:
+            shotdata['firstFrame'] = 0
+            shotdata['lastFrame'] = 100
         self.connection.close()
 
         shotConnection, shotCur = self._get_shotdb(shot)
@@ -85,8 +99,13 @@ class SQLiteDatabase(Database):
         all = shotCur.fetchall()
 
         takes = []
+        # take_number INTEGER PRIMARY KEY, path text, created_on datetime, created_by text, task_type text
         for take in all:
-            takes.append({'id': take[0]})
+            takes.append({'take_number': take[0],
+                          'path': take[1],
+                          'created_on': datetime.strptime(take[2], '%Y-%m-%d %X.%f'),
+                          'created_by': take[3],
+                          'task_type': take[4]})
         shotdata['takes'] = takes
 
         shotCur.execute('SELECT * from reviews')
@@ -100,25 +119,61 @@ class SQLiteDatabase(Database):
 
         return shotdata
 
-    # Save
+    # New
 
     def new_shot(self, shotname, firstframe, lastframe):
         """Create a new shot in the DB."""
         self.connect()
-        if shotname in self.get_shots(keepOpen=True):
+        if shotname in self.get_shots_or_assets(keepOpen=True):
             raise ValueError('Shot {0} already exists in db.'.format(shotname))
         self.cursor.execute("INSERT INTO shots (shotname) VALUES ('{0}')".format(shotname))
 
         # Create a DB for the shot
         shotConnection, shotCur = self._get_shotdb(shotname)
-
-        shotCur.execute('CREATE TABLE takes (takeid INTEGER PRIMARY KEY)')
-        shotCur.execute('CREATE TABLE reviews (reviewid INTEGER PRIMARY KEY)')
+        # take_number, path, created_on, created_by
+        shotCur.execute('CREATE TABLE takes (take_number INTEGER PRIMARY KEY, path text, created_on datetime, created_by text, task_type text)')
+        shotCur.execute('CREATE TABLE reviews (review_number INTEGER PRIMARY KEY)')
 
         shotConnection.commit()
         shotConnection.close()
         self.connection.commit()
         self.connection.close()
+
+    def new_asset(self, assetname):
+        """Create a new shot in the DB."""
+        self.connect()
+        if assetname in self.get_shots_or_assets(keepOpen=True, assets=True):
+            raise ValueError('Asset {0} already exists in db.'.format(assetname))
+        self.cursor.execute("INSERT INTO assets (assetname) VALUES ('{0}')".format(assetname))
+
+        # Create a DB for the shot
+        shotConnection, shotCur = self._get_shotdb(assetname)
+        # take_number, path, created_on, created_by
+        shotCur.execute('CREATE TABLE takes (take_number INTEGER PRIMARY KEY, path text, created_on datetime, created_by text, task_type text)')
+        shotCur.execute('CREATE TABLE reviews (review_number INTEGER PRIMARY KEY)')
+
+        shotConnection.commit()
+        shotConnection.close()
+        self.connection.commit()
+        self.connection.close()
+
+    # Takes
+    def new_take(self, take):
+        """Create a new take for a shot."""
+        print("New take Called")
+        # Create a DB for the shot
+        shotConnection, shotCur = self._get_shotdb(take.shot.name)
+
+        call = 'INSERT INTO takes (take_number, path, created_on, created_by, task_type) ' \
+               'values({take_number}, "{path}", "{created_on}", "{created_by}", "{task_type}")'.format(take_number=take.take_number,
+                                                                                  path=take.path,
+                                                                                  created_on=take.created_on,
+                                                                                  created_by=take.created_by,
+                                                                                  task_type=take.task_type)
+        print(call)
+        shotCur.execute(call)
+        shotConnection.commit()
+        shotConnection.close()
 
     # Util
 
