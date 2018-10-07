@@ -39,7 +39,7 @@ class DataManager(object):
         """List all shots in the project."""
         return [x[0] for x in self.database.get_shots_or_assets()]
 
-    def new_shot(self, shotname, firstframe, lastframe):
+    def new_shot(self, shotname):
         """
         Create a new shot in the db and on the file system.
         Args:
@@ -50,7 +50,7 @@ class DataManager(object):
         """
         if shotname in self.get_shots():
             raise KeyError("Unable to create shot. This shot already exists!")
-        self.database.new_shot(shotname, firstframe, lastframe)
+        self.database.new_shot(shotname, 0, 10)
         self.files.new_shot(shotname)
         return self.get_shot(shotname)
 

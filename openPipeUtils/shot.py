@@ -82,5 +82,5 @@ class Asset(Shot):
             takes(list:openPipe Take Objects)
             reviews(list:openPipe Review Objects)
         """
-        super(Asset, self).__init__(asset, takes, reviews, dm, **kwargs)
+        Shot.__init__(self, asset, takes, reviews, dm, **kwargs)
         self.workon_type = 'asset'

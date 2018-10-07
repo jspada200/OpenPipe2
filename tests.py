@@ -2,9 +2,9 @@ import datamanager
 dm = datamanager.DataManager(r'G:\Dropbox\openpipe\BaseTestProject\New_Project')
 
 try:
-    shot = dm.new_shot('tst0010', 0, 100)
+    asset = dm.new_asset('giacomo')
 except:
-    shot = dm.get_shot_or_asset('tst0010')
-# shot.create_task_dir('model')
+    asset = dm.get_shot_or_asset('giacomo')
+asset.create_task_dir('rig')
 
-shot.create_new_take("G:\\Dropbox\\openpipe\\BaseTestProject\\New_Project\\scenes\\tst0010\\model\\scene.json")
+# shot.create_new_take("G:\\Dropbox\\openpipe\\BaseTestProject\\New_Project\\scenes\\tst0010\\model\\scene.json")

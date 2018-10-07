@@ -27,7 +27,7 @@ class Settings(object):
 
         if not os.path.isfile(self.jsonSettingsFile):
             self.generateInitalSettings()
-
+        print(self.jsonSettingsFile)
         with open(self.jsonSettingsFile) as f:
             settings = json.load(f)
 

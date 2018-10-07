@@ -6,7 +6,7 @@ import maya.cmds as cmds
 
 def get_project():
     """Get the currently open maya project and validate."""
-    proj_path = cmds.workspace(q=True, dir=True)
+    proj_path = cmds.workspace(q=True, rd=True)
     # Check to see if the workspace has a openPipe proj already
 
     return proj_path
