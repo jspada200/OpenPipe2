@@ -183,3 +183,23 @@ class SQLiteDatabase(Database):
         shotConnection = sqlite3.connect(shotDbPath)
         shotCur = shotConnection.cursor()
         return shotConnection, shotCur
+
+class MySqlDatabase(Database):
+    """Connect to a mySql database."""
+
+    def __init__(self, dm):
+        """Create a database connection."""
+        import mysql.connector
+        self._dm = _dm
+
+        self._connectionsettings = self._dm.settings.get('MYSQL_SETTINGS', None)
+        if not self._connectionsettings:
+            raise AttributeError("No database information is set in the settings object.")
+
+        self.dataconn = mysql.connector.connect(host=self._connectionsettings['host'],
+                                                user=self._connectionsettings['user'],
+                                                passwd=self._connectionsettings['password'],
+                                                port=self._connectionsettings['port'])
+
+
+
