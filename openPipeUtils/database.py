@@ -2,13 +2,14 @@
 # Open Pipe
 # Utility classes for interacting with the DB.
 import sqlite3
+import mysql.connector as mysqlcon
 from datetime import datetime
 import os
 
 class Database(object):
     """Base class for interacting with different DBs."""
 
-    def __init__(self):
+    def __init__(self, dataDir, init_db=False):
         """Set up object."""
         pass
 
@@ -19,7 +20,7 @@ class Database(object):
 class SQLiteDatabase(Database):
     """Class for storing and getting data from an SQLite file."""
 
-    def __init__(self, dataDir, initFile=False):
+    def __init__(self, dm, dataDir, initDb=False):
         """
         Set up object and create a connection.
 
@@ -29,6 +30,7 @@ class SQLiteDatabase(Database):
         """
         self.dataDir = dataDir
         sqlitePath = os.path.join(dataDir, 'db.sqlite')
+        self._dm = dm
 
         if not os.path.isfile(sqlitePath) and not initFile:
             raise IOError('No SQLite file exists for the project.')
@@ -187,19 +189,48 @@ class SQLiteDatabase(Database):
 class MySqlDatabase(Database):
     """Connect to a mySql database."""
 
-    def __init__(self, dm):
+    def __init__(self, dm, dataDir, initDb=False):
         """Create a database connection."""
         import mysql.connector
-        self._dm = _dm
-
+        self._dm = dm
+        self.datadir = dataDir
         self._connectionsettings = self._dm.settings.get('MYSQL_SETTINGS', None)
         if not self._connectionsettings:
             raise AttributeError("No database information is set in the settings object.")
+        if initDb:
+            self.connect()
 
-        self.dataconn = mysql.connector.connect(host=self._connectionsettings['host'],
-                                                user=self._connectionsettings['user'],
-                                                passwd=self._connectionsettings['password'],
-                                                port=self._connectionsettings['port'])
+    def connect(self):
+        self.connection = mysqlcon.connect(host=self._connectionsettings['host'],
+                                           user=self._connectionsettings['user'],
+                                           passwd=self._connectionsettings['password'],
+                                           port=self._connectionsettings['port'])
 
+        self.cursor = self.connection.cursor()
 
+        # Check to see if our tables exist. If not, create them.
+        self.cursor.execute("SHOW DATABASES")
+
+        if 'openpipe' not in self.cursor:
+            self.init_starting_db()
+
+    def init_starting_db(self):
+        """Set up the main index for a new project."""
+        print("Creating shots DB")
+        self.cursor.execute("CREATE DATABASE mydatabase")
+
+        self.cursor.execute("CREATE TABLE shots (id INT AUTO_INCREMENT PRIMARY KEY, name VARCHAR(255))")
+        self.cursor.execute("CREATE TABLE assets (id INT AUTO_INCREMENT PRIMARY KEY, name VARCHAR(255))")
+
+    def get_shots_or_assets(self, keepOpen=False, assets=False):
+        """Get a list of all shots."""
+        self.connect()
+        if assets:
+            self.cursor.execute("SELECT * from assets")
+        else:
+            self.cursor.execute("SELECT * from shots")
+        all = self.cursor.fetchall()
+        if not keepOpen:
+            self.connection.close()
+        return all
 

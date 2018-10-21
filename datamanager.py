@@ -15,13 +15,18 @@ class DataManager(object):
         """Init the object for interacting with openPipe."""
         cm = inspect.getfile(inspect.currentframe())
         sys.path.append(os.path.join(os.path.dirname(cm), 'openPipeHooks'))
-
-        self.files = filemanager.FileManager(projectBase, self)
         self.settings = settings.Settings(projectBase)
-        self.database = database.SQLiteDatabase(os.path.join(projectBase,
-                                                             'openPipe',
-                                                             'data'),
-                                                initFile=True)
+
+        # Check to see what methods we will use for connecting to a database
+        # and dealing with storing files.
+        db_type = self.settings.get('DB_METHOD', 'SQLiteDatabase')
+        files_type = self.settings.get('FILE_SYS_METHOD', 'FileManager')
+
+        db_obj = getattr(database, db_type)
+        files_obj = getattr(filemanager, files_type)
+
+        self.files = files_obj(projectBase, self)
+        self.database =db_obj(self, os.path.join(projectBase, 'openPipe', 'data'), initDb=True)
 
     def get_shot_or_asset(self, name):
         """Return a shot or asset object."""

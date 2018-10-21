@@ -40,4 +40,7 @@ class Settings(object):
 
     def get(self, val, fallback):
         """Get a value or return the fallback."""
-        return eval('self.' + val) or fallback
+        try:
+            return getattr(self, val)
+        except AttributeError:
+            return fallback

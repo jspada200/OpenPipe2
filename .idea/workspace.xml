@@ -2,9 +2,14 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="6eb70719-06f5-4844-afd0-e2cb6f51dc7c" name="Default Changelist" comment="Default Changelist">
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.idea/vcs.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/OpenPipe2.iml" afterPath="$PROJECT_DIR$/.idea/OpenPipe2.iml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/misc.xml" afterPath="$PROJECT_DIR$/.idea/misc.xml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/datamanager.py" afterPath="$PROJECT_DIR$/datamanager.py" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/openPipeUtils/constents.py" afterPath="$PROJECT_DIR$/openPipeUtils/constents.py" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/openPipeUtils/database.py" afterPath="$PROJECT_DIR$/openPipeUtils/database.py" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/openPipeUtils/settings.py" afterPath="$PROJECT_DIR$/openPipeUtils/settings.py" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/tests.py" afterPath="$PROJECT_DIR$/tests.py" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="TRACKING_ENABLED" value="true" />
@@ -63,38 +68,86 @@
       <file leaf-file-name="constents.py" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/openPipeUtils/constents.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="130">
-              <caret line="5" column="17" lean-forward="false" selection-start-line="5" selection-start-column="17" selection-end-line="5" selection-end-column="17" />
+            <state relative-caret-position="234">
+              <caret line="9" column="20" lean-forward="true" selection-start-line="9" selection-start-column="20" selection-end-line="9" selection-end-column="28" />
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="settings.py" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/openPipeUtils/settings.py">
+      <file leaf-file-name="component.py" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/openPipeUtils/component.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-309">
-              <caret line="16" column="22" lean-forward="false" selection-start-line="16" selection-start-column="22" selection-end-line="16" selection-end-column="22" />
+            <state relative-caret-position="260">
+              <caret line="10" column="22" lean-forward="false" selection-start-line="10" selection-start-column="22" selection-end-line="10" selection-end-column="22" />
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="openPipeSettings.json" pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/../../openpipe/BaseTestProject/New_Project/openPipe/settings/openPipeSettings.json">
+      <file leaf-file-name="__init__.py" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/openPipeUtils/__init__.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="0">
+              <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="database.py" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/openPipeUtils/database.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="283">
+              <caret line="94" column="32" lean-forward="true" selection-start-line="94" selection-start-column="32" selection-end-line="94" selection-end-column="32" />
+              <folding>
+                <element signature="e#94#108#0" expanded="true" />
+                <element signature="e#4026#4826#0" expanded="false" />
+                <element signature="e#4872#5692#0" expanded="false" />
+                <element signature="e#5744#6680#0" expanded="false" />
+                <element signature="e#6735#6990#0" expanded="false" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="shot.py" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/openPipeUtils/shot.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="1456">
+              <caret line="56" column="34" lean-forward="false" selection-start-line="56" selection-start-column="34" selection-end-line="56" selection-end-column="34" />
+              <folding>
+                <element signature="e#95#113#0" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="take.py" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/openPipeUtils/take.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="624">
+              <caret line="24" column="13" lean-forward="true" selection-start-line="24" selection-start-column="13" selection-end-line="24" selection-end-column="13" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="tests.py" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/tests.py">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="234">
-              <caret line="9" column="35" lean-forward="false" selection-start-line="9" selection-start-column="35" selection-end-line="9" selection-end-column="35" />
+              <caret line="9" column="3" lean-forward="false" selection-start-line="9" selection-start-column="3" selection-end-line="9" selection-end-column="3" />
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="scene.json" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/../../openpipe/BaseTestProject/New_Project/scenes/tst0010/model/scene.json">
+      <file leaf-file-name="openPipeSettings.json" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/../../openpipe/BaseTestProject/New_Project/openPipe/settings/openPipeSettings.json">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="130">
-              <caret line="5" column="19" lean-forward="false" selection-start-line="5" selection-start-column="19" selection-end-line="5" selection-end-column="19" />
+            <state relative-caret-position="0">
+              <caret line="0" column="1" lean-forward="true" selection-start-line="0" selection-start-column="1" selection-end-line="0" selection-end-column="1" />
               <folding />
             </state>
           </provider>
@@ -103,62 +156,8 @@
       <file leaf-file-name="datamanager.py" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/datamanager.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="156">
-              <caret line="9" column="0" lean-forward="false" selection-start-line="9" selection-start-column="0" selection-end-line="9" selection-end-column="0" />
-              <folding>
-                <element signature="e#106#169#0" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="filemanager.py" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/openPipeUtils/filemanager.py">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="531">
-              <caret line="32" column="34" lean-forward="false" selection-start-line="32" selection-start-column="34" selection-end-line="32" selection-end-column="34" />
-              <folding>
-                <element signature="e#95#104#0" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="database.py" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/openPipeUtils/database.py">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="416">
-              <caret line="18" column="20" lean-forward="false" selection-start-line="18" selection-start-column="6" selection-end-line="18" selection-end-column="20" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="scratch.py" pinned="false" current-in-tab="false">
-        <entry file="file://$APPLICATION_CONFIG_DIR$/scratches/scratch.py">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="130">
-              <caret line="5" column="2" lean-forward="true" selection-start-line="5" selection-start-column="2" selection-end-line="8" selection-end-column="11" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="checkin.py" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/openPipeMayaUtils/checkin.py">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="52">
-              <caret line="2" column="24" lean-forward="false" selection-start-line="2" selection-start-column="24" selection-end-line="2" selection-end-column="24" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="utils.py" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/openPipeMayaUtils/utils.py">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="286">
-              <caret line="11" column="20" lean-forward="false" selection-start-line="11" selection-start-column="20" selection-end-line="11" selection-end-column="20" />
+            <state relative-caret-position="104">
+              <caret line="4" column="63" lean-forward="true" selection-start-line="4" selection-start-column="63" selection-end-line="4" selection-end-column="63" />
               <folding />
             </state>
           </provider>
@@ -184,6 +183,7 @@
       <find>process_scene</find>
       <find>_determin_pub_dir</find>
       <find>cop</find>
+      <find>mysql</find>
     </findStrings>
     <replaceStrings>
       <replace>&quot;</replace>
@@ -211,13 +211,9 @@
         <option value="$PROJECT_DIR$/mayaUtils/utils.py" />
         <option value="$USER_HOME$/Documents/maya/2017/prefs/scripts/userSetup.mel" />
         <option value="$USER_HOME$/Documents/maya/2017/prefs/scripts/userSetup.py" />
-        <option value="$PROJECT_DIR$/openPipeUtils/constents.py" />
         <option value="$PROJECT_DIR$/openPipeUtils/maya_hooks.py" />
         <option value="$PROJECT_DIR$/openPipeHooks/__init__.py" />
         <option value="$PROJECT_DIR$/openPipeHooks/maya_hooks.py" />
-        <option value="$PROJECT_DIR$/tests.py" />
-        <option value="$PROJECT_DIR$/openPipeUtils/settings.py" />
-        <option value="$PROJECT_DIR$/datamanager.py" />
         <option value="$PROJECT_DIR$/openPipeUtils/filemanager.py" />
         <option value="$PROJECT_DIR$/../../openpipe/BaseTestProject/New_Project/scenes/tst0010/model/scene.json" />
         <option value="$PROJECT_DIR$/openPipeUtils/shot.py" />
@@ -228,8 +224,12 @@
         <option value="$PROJECT_DIR$/openPipeMayaUtils/utils.py" />
         <option value="$PROJECT_DIR$/openPipeMayaUtils/checkin.py" />
         <option value="$APPLICATION_CONFIG_DIR$/scratches/scratch.py" />
-        <option value="$PROJECT_DIR$/openPipeUtils/database.py" />
+        <option value="$PROJECT_DIR$/openPipeUtils/constents.py" />
+        <option value="$PROJECT_DIR$/openPipeUtils/settings.py" />
+        <option value="$PROJECT_DIR$/tests.py" />
+        <option value="$PROJECT_DIR$/datamanager.py" />
         <option value="$PROJECT_DIR$/../../openpipe/BaseTestProject/New_Project/openPipe/settings/openPipeSettings.json" />
+        <option value="$PROJECT_DIR$/openPipeUtils/database.py" />
       </list>
     </option>
   </component>
@@ -247,7 +247,7 @@
   </component>
   <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
   <component name="ProjectView">
-    <navigator proportions="" version="1">
+    <navigator currentView="ProjectPane" proportions="" version="1">
       <flattenPackages />
       <showMembers />
       <showModules />
@@ -260,7 +260,36 @@
       <manualOrder />
       <foldersAlwaysOnTop value="true" />
     </navigator>
-    <panes />
+    <panes>
+      <pane id="Scratches" />
+      <pane id="Scope" />
+      <pane id="ProjectPane">
+        <subPane>
+          <expand>
+            <path>
+              <item name="OpenPipe2" type="b2602c69:ProjectViewProjectNode" />
+              <item name="OpenPipe2" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="OpenPipe2" type="b2602c69:ProjectViewProjectNode" />
+              <item name="OpenPipe2" type="462c0819:PsiDirectoryNode" />
+              <item name="openPipeHooks" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="OpenPipe2" type="b2602c69:ProjectViewProjectNode" />
+              <item name="OpenPipe2" type="462c0819:PsiDirectoryNode" />
+              <item name="openPipeMayaUtils" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="OpenPipe2" type="b2602c69:ProjectViewProjectNode" />
+              <item name="OpenPipe2" type="462c0819:PsiDirectoryNode" />
+              <item name="openPipeUtils" type="462c0819:PsiDirectoryNode" />
+            </path>
+          </expand>
+          <select />
+        </subPane>
+      </pane>
+    </panes>
   </component>
   <component name="PropertiesComponent">
     <property name="WebServerToolWindowFactoryState" value="false" />
@@ -290,7 +319,7 @@
       </list>
     </option>
   </component>
-  <component name="RunManager" selected="Python.scratch">
+  <component name="RunManager" selected="Python.tests">
     <configuration name="scratch" type="PythonConfigurationType" factoryName="Python" temporary="true">
       <option name="INTERPRETER_OPTIONS" value="" />
       <option name="PARENT_ENVS" value="true" />
@@ -331,8 +360,9 @@
       <item index="1" class="java.lang.String" itemvalue="Python.scratch" />
     </list>
     <recent_temporary>
-      <list size="1">
-        <item index="0" class="java.lang.String" itemvalue="Python.scratch" />
+      <list size="2">
+        <item index="0" class="java.lang.String" itemvalue="Python.tests" />
+        <item index="1" class="java.lang.String" itemvalue="Python.scratch" />
       </list>
     </recent_temporary>
   </component>
@@ -371,14 +401,21 @@
       <option name="project" value="LOCAL" />
       <updated>1538869401445</updated>
     </task>
-    <option name="localTasksCounter" value="4" />
+    <task id="LOCAL-00004" summary="Default Changelist">
+      <created>1539028970671</created>
+      <option name="number" value="00004" />
+      <option name="presentableId" value="LOCAL-00004" />
+      <option name="project" value="LOCAL" />
+      <updated>1539028970671</updated>
+    </task>
+    <option name="localTasksCounter" value="5" />
     <servers />
   </component>
   <component name="ToolWindowManager">
     <frame x="84" y="-9" width="1845" height="1098" extended-state="6" />
     <editor active="true" />
     <layout>
-      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.24958949" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="-1" side_tool="true" content_ui="tabs" />
       <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.3294979" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
@@ -410,7 +447,9 @@
     <option name="LAST_COMMIT_MESSAGE" value="Default Changelist" />
   </component>
   <component name="XDebuggerManager">
-    <breakpoint-manager />
+    <breakpoint-manager>
+      <option name="time" value="1" />
+    </breakpoint-manager>
     <watches-manager />
   </component>
   <component name="editorHistoryManager">
@@ -450,9 +489,7 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="156">
           <caret line="9" column="0" lean-forward="false" selection-start-line="9" selection-start-column="0" selection-end-line="9" selection-end-column="0" />
-          <folding>
-            <element signature="e#106#169#0" expanded="true" />
-          </folding>
+          <folding />
         </state>
       </provider>
     </entry>
@@ -470,7 +507,13 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="4004">
           <caret line="156" column="32" lean-forward="false" selection-start-line="156" selection-start-column="32" selection-end-line="156" selection-end-column="32" />
-          <folding />
+          <folding>
+            <element signature="e#94#108#0" expanded="true" />
+            <element signature="e#4026#4826#0" expanded="false" />
+            <element signature="e#4872#5692#0" expanded="false" />
+            <element signature="e#5744#6680#0" expanded="false" />
+            <element signature="e#6735#6990#0" expanded="false" />
+          </folding>
         </state>
       </provider>
     </entry>
@@ -510,13 +553,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/openPipeUtils/component.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="210">
-          <caret line="10" column="22" lean-forward="false" selection-start-line="10" selection-start-column="22" selection-end-line="10" selection-end-column="22" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/mayaUtils/userSetup.mel" />
     <entry file="file://$USER_HOME$/Documents/maya/2017/prefs/scripts/userSetup.mel" />
     <entry file="file://$PROJECT_DIR$/mayaUtils/userSetup.py" />
@@ -533,36 +569,6 @@
       </provider>
     </entry>
     <entry file="file://$USER_HOME$/Documents/maya/scripts/mayaUtils/checkin.py" />
-    <entry file="file://$PROJECT_DIR$/openPipeUtils/take.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="624">
-          <caret line="24" column="13" lean-forward="true" selection-start-line="24" selection-start-column="13" selection-end-line="24" selection-end-column="13" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/openPipeUtils/shot.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1397">
-          <caret line="56" column="34" lean-forward="false" selection-start-line="56" selection-start-column="34" selection-end-line="56" selection-end-column="34" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/tests.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="234">
-          <caret line="9" column="41" lean-forward="false" selection-start-line="9" selection-start-column="41" selection-end-line="9" selection-end-column="41" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/openPipeUtils/constents.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="130">
-          <caret line="5" column="17" lean-forward="false" selection-start-line="5" selection-start-column="17" selection-end-line="5" selection-end-column="17" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/openPipeUtils/filemanager.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="531">
@@ -597,45 +603,99 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/openPipeUtils/settings.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-309">
-          <caret line="16" column="22" lean-forward="false" selection-start-line="16" selection-start-column="22" selection-end-line="16" selection-end-column="22" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$APPLICATION_CONFIG_DIR$/scratches/scratch.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="130">
-          <caret line="5" column="2" lean-forward="true" selection-start-line="5" selection-start-column="2" selection-end-line="8" selection-end-column="11" />
+          <caret line="5" column="2" lean-forward="false" selection-start-line="5" selection-start-column="2" selection-end-line="8" selection-end-column="11" />
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/openPipeUtils/database.py">
+    <entry file="file://$PROJECT_DIR$/openPipeUtils/shot.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="416">
-          <caret line="18" column="20" lean-forward="false" selection-start-line="18" selection-start-column="6" selection-end-line="18" selection-end-column="20" />
+        <state relative-caret-position="1456">
+          <caret line="56" column="34" lean-forward="false" selection-start-line="56" selection-start-column="34" selection-end-line="56" selection-end-column="34" />
+          <folding>
+            <element signature="e#95#113#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/openPipeUtils/take.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="624">
+          <caret line="24" column="13" lean-forward="true" selection-start-line="24" selection-start-column="13" selection-end-line="24" selection-end-column="13" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/openPipeUtils/constents.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="234">
+          <caret line="9" column="20" lean-forward="true" selection-start-line="9" selection-start-column="20" selection-end-line="9" selection-end-column="28" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/openPipeUtils/component.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="260">
+          <caret line="10" column="22" lean-forward="false" selection-start-line="10" selection-start-column="22" selection-end-line="10" selection-end-column="22" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/openPipeUtils/__init__.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="0">
+          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/openPipeUtils/settings.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="884">
+          <caret line="36" column="37" lean-forward="true" selection-start-line="36" selection-start-column="37" selection-end-line="36" selection-end-column="37" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/tests.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="234">
+          <caret line="9" column="3" lean-forward="false" selection-start-line="9" selection-start-column="3" selection-end-line="9" selection-end-column="3" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/../../openpipe/BaseTestProject/New_Project/openPipe/settings/openPipeSettings.json">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="0">
+          <caret line="0" column="1" lean-forward="true" selection-start-line="0" selection-start-column="1" selection-end-line="0" selection-end-column="1" />
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/datamanager.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="156">
-          <caret line="9" column="0" lean-forward="false" selection-start-line="9" selection-start-column="0" selection-end-line="9" selection-end-column="0" />
-          <folding>
-            <element signature="e#106#169#0" expanded="true" />
-          </folding>
+        <state relative-caret-position="104">
+          <caret line="4" column="63" lean-forward="true" selection-start-line="4" selection-start-column="63" selection-end-line="4" selection-end-column="63" />
+          <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/../../openpipe/BaseTestProject/New_Project/openPipe/settings/openPipeSettings.json">
+    <entry file="file://$PROJECT_DIR$/openPipeUtils/database.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="234">
-          <caret line="9" column="35" lean-forward="false" selection-start-line="9" selection-start-column="35" selection-end-line="9" selection-end-column="35" />
-          <folding />
+        <state relative-caret-position="283">
+          <caret line="94" column="32" lean-forward="true" selection-start-line="94" selection-start-column="32" selection-end-line="94" selection-end-column="32" />
+          <folding>
+            <element signature="e#94#108#0" expanded="true" />
+            <element signature="e#4026#4826#0" expanded="false" />
+            <element signature="e#4872#5692#0" expanded="false" />
+            <element signature="e#5744#6680#0" expanded="false" />
+            <element signature="e#6735#6990#0" expanded="false" />
+          </folding>
         </state>
       </provider>
     </entry>

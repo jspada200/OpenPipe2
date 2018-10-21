@@ -4,3 +4,8 @@
 
 SOURCES = 'sources'
 SCENES = 'scenes'
+
+# Database
+
+SHOTSANDASSETSDB = 'op_shots'
+
