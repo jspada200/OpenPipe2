@@ -5,6 +5,7 @@ import sqlite3
 import mysql.connector as mysqlcon
 from datetime import datetime
 import os
+from openPipeUtils import constents
 
 class Database(object):
     """Base class for interacting with different DBs."""
@@ -49,8 +50,8 @@ class SQLiteDatabase(Database):
         self.cursor = self.connection.cursor()
 
         # Build the shotlist table
-        self.cursor.execute('CREATE TABLE shots (shotname STRING PRIMARY KEY)')
-        self.cursor.execute('CREATE TABLE assets (assetname STRING PRIMARY KEY)')
+        self.cursor.execute(constents.SQLMAKETAKESHOTS)
+        self.cursor.execute(constents.SQLMAKETAKEASSETS)
         self.connection.commit()
         self.connection.close()
 
@@ -65,9 +66,9 @@ class SQLiteDatabase(Database):
         """Get a list of all shots."""
         self.connect()
         if assets:
-            self.cursor.execute('SELECT * from assets')
+            self.cursor.execute(constents.SQLSELECTASSETS)
         else:
-            self.cursor.execute('SELECT * from shots')
+            self.cursor.execute(constents.SQLSELECTSHOTS)
         all = self.cursor.fetchall()
         if not keepOpen:
             self.connection.close()
@@ -79,11 +80,11 @@ class SQLiteDatabase(Database):
         asset = False
 
         self.connect()
-        self.cursor.execute("SELECT * from shots WHERE shotname='{0}'".format(shot))
+        self.cursor.execute(constents.SQLSELECTFROMSHOTS.format(shot))
         info = self.cursor.fetchone()
         if not info:
             asset = True
-            self.cursor.execute("SELECT * from assets WHERE assetname='{0}'".format(shot))
+            self.cursor.execute(constents.SQLSELECTFROMASSETS.format(shot))
             info = self.cursor.fetchone()
 
         if not info:
@@ -97,8 +98,8 @@ class SQLiteDatabase(Database):
         self.connection.close()
 
         shotConnection, shotCur = self._get_shotdb(shot)
-        shotCur.execute('SELECT * from takes')
-        all = shotCur.fetchall()
+        shotCur.execute()
+        all = shotCur.fetchall(constents.SQLLOCALSELECTFROMTAKES)
 
         takes = []
         # take_number INTEGER PRIMARY KEY, path text, created_on datetime, created_by text, task_type text
@@ -110,7 +111,7 @@ class SQLiteDatabase(Database):
                           'task_type': take[4]})
         shotdata['takes'] = takes
 
-        shotCur.execute('SELECT * from reviews')
+        shotCur.execute(constents.SQLLOCALSELECTFROMREVIEWS)
         all = shotCur.fetchall()
 
         reviews = []
@@ -211,26 +212,110 @@ class MySqlDatabase(Database):
         # Check to see if our tables exist. If not, create them.
         self.cursor.execute("SHOW DATABASES")
 
-        if 'openpipe' not in self.cursor:
+        x = self.cursor.fetchall()
+
+        if x:
+            print("CURSOR " + str(x))
+
+        if 'mydatabase2' not in str(x):
             self.init_starting_db()
 
     def init_starting_db(self):
         """Set up the main index for a new project."""
         print("Creating shots DB")
-        self.cursor.execute("CREATE DATABASE mydatabase")
+        self.cursor.execute("CREATE DATABASE mydatabase2")
+        self.cursor.execute("USE mydatabase2")
 
-        self.cursor.execute("CREATE TABLE shots (id INT AUTO_INCREMENT PRIMARY KEY, name VARCHAR(255))")
-        self.cursor.execute("CREATE TABLE assets (id INT AUTO_INCREMENT PRIMARY KEY, name VARCHAR(255))")
+        self.cursor.execute("CREATE TABLE shots (id INT AUTO_INCREMENT PRIMARY KEY, shotname VARCHAR(255))")
+        self.cursor.execute("CREATE TABLE assets (id INT AUTO_INCREMENT PRIMARY KEY, assetname VARCHAR(255))")
+        self.cursor.execute(constents.SQLMAKETAKETABLE)
+        self.cursor.execute(constents.SQLMAKEREVIEWSTABLE)
 
     def get_shots_or_assets(self, keepOpen=False, assets=False):
         """Get a list of all shots."""
-        self.connect()
+        self.cursor.execute("USE mydatabase2")
         if assets:
             self.cursor.execute("SELECT * from assets")
         else:
             self.cursor.execute("SELECT * from shots")
         all = self.cursor.fetchall()
-        if not keepOpen:
-            self.connection.close()
+
         return all
 
+    def get_shot_data(self, shot):
+        """Get info for this shot."""
+        self.cursor.execute("USE mydatabase2")
+        shotdata = {}
+        asset = False
+        print(constents.SQLSELECTFROMSHOTS.format(shot))
+        self.cursor.execute(constents.SQLSELECTFROMSHOTS.format(shot))
+        info = self.cursor.fetchone()
+        if not info:
+            asset = True
+            print(constents.SQLSELECTFROMASSETS.format(shot))
+            self.cursor.execute(constents.SQLSELECTFROMASSETS.format(shot))
+            info = self.cursor.fetchone()
+
+        if not info:
+            raise KeyError('No such shot {0} exists'.format(shot))
+
+        shotdata['name'] = info[0]
+
+        if not asset:
+            shotdata['firstFrame'] = 0
+            shotdata['lastFrame'] = 100
+        self.cursor.execute(constents.SQLREMOTESELECTFROMTAKES.format(shot))
+        all = self.cursor.fetchall()
+
+        takes = []
+        # take_number INTEGER PRIMARY KEY, path text, created_on datetime, created_by text, task_type text
+        for take in all:
+            takes.append({'take_number': take[0],
+                          'path': take[1],
+                          'created_on': datetime.strptime(take[2], '%Y-%m-%d %X.%f'),
+                          'created_by': take[3],
+                          'task_type': take[4]})
+        shotdata['takes'] = takes
+
+        self.cursor.execute(constents.SQLREMOTESELECTFROMREVIEWS.format(shot))
+        all = self.cursor.fetchall()
+
+        reviews = []
+        for review in all:
+            reviews.append({'id': review[0]})
+        shotdata['reviews'] = reviews
+
+        return shotdata
+
+    def new_shot(self, shotname, firstframe, lastframe):
+        """Create a new shot in the DB."""
+        self.cursor.execute("USE mydatabase2")
+        if shotname in self.get_shots_or_assets():
+            raise ValueError('Shot {0} already exists in db.'.format(shotname))
+        self.cursor.execute(constents.SQLNEWSHOT.format(shotname))
+
+    def new_asset(self, assetname):
+        """Create a new shot in the DB."""
+        self.cursor.execute("USE mydatabase2")
+        if assetname in self.get_shots_or_assets(assets=True):
+            raise ValueError('Asset {0} already exists in db.'.format(assetname))
+        self.cursor.execute(constents.SQLNEWASSET.format(assetname))
+
+    # Takes
+    def new_take(self, take):
+        """Create a new take for a shot."""
+        self.cursor.execute("USE mydatabase2")
+        print("New take Called")
+        # Create a DB for the shot
+        shotConnection, shotCur = self._get_shotdb(take.shot.name)
+
+        call = constents.SQLREMOTENEWTAKE.format(take_number=take.take_number,
+                                                 path=take.path,
+                                                 created_on=take.created_on,
+                                                 created_by=take.created_by,
+                                                 task_type=take.task_type,
+                                                 shotname=take.shot.name)
+        self.cursor.execute(call)
+
+    def __del__(self):
+        self.connection.close()

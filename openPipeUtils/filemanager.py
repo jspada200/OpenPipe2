@@ -131,6 +131,10 @@ class FileManager(object):
     def get_shot_or_asset_dir(self, name):
         assets_dir = os.path.join(self.project_dir, 'assets')
         shots_dir = os.path.join(self.project_dir, 'scenes')
+        print("ASSETS " + assets_dir)
+        print("shots " + shots_dir)
+        print("name " + str(name))
+
         if os.path.isdir(os.path.join(assets_dir, name)):
             return os.path.join(assets_dir, name)
         elif os.path.isdir(os.path.join(shots_dir, name)):
