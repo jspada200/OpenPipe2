@@ -31,6 +31,7 @@ class Scene():
         self._data = new_data
         self._validate()
 
+
     def get_tasks(self):
         """Return top level tasks."""
         task_names = []
