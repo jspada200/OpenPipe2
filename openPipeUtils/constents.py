@@ -32,3 +32,13 @@ SQLMAKEREVIEWSTABLE = 'CREATE TABLE reviews (review_number INTEGER PRIMARY KEY, 
 
 SQLREMOTENEWTAKE = ('INSERT INTO takes (take_number, path, created_on, created_by, task_type, shotname) '
                     'values({take_number}, "{path}", "{created_on}", "{created_by}", "{task_type}", "{shotname}")')
+
+# DATA IDENTIFIERS
+DATA_TYPE_ID = '#type'
+TASK_DATA_TYPE = '#task'
+AUTHOR = 'author'
+DATE = 'date'
+NOTES = 'notes'
+SCENE_FILE = 'scene_file'
+SUPPORT_FILES = 'supporting_files'
+APP_FILES = 'application_files'

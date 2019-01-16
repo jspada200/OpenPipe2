@@ -7,6 +7,7 @@
 import os
 import datetime
 import json
+from . import constents as const
 
 
 class Scene():
@@ -19,25 +20,49 @@ class Scene():
                 json_path(str): A path to a json file containing the scene
                 scene_dict(dict): If the info exists in dict form, use that.
         """
-        self.tasks = []
         self._data = {}
+
+        self.filepath = json_path
 
         if scene_dict:
             self._data = scene_dict
         elif json_path and os.path.exists(json_path):
             self._data = json.loads(json_path)
 
+    def _load_from_dict(self, scene_dict):
+        """
+        Create the info in this object form a loaded dict
+
+        :param scene_dict: Dict with scene info
+        :return: None
+        """
+        for data_key, info in scene_dict.iteritems():
+            if type(info) == dict:
+                if info.get(const.DATA_TYPE_ID, '') == const.TASK_DATA_TYPE:
+                    new_task = Task(data_key,
+                                    info.get(const.AUTHOR),
+                                    info.get(const.NOTES),
+                                    info.get(const.DATE))
+                    for app, appinfo in info.get(const.APP_FILES):
+                        new_task.add_application(app,
+                                                 appinfo.get(const.SCENE_FILE),
+                                                 appinfo.get(const.SUPPORT_FILES))
+                    self._data[data_key] = new_task
+                    continue
+
+            exec('self.{0} = {1}'.format(data_key, info))
+
+
     def merge(self, scene_obj):
         """Merge scene objects with this object being the main object."""
         new_data = scene_obj.update(self._data)
         self._data = new_data
-        self._validate()
 
     def get_tasks(self):
         """Return top level tasks."""
         task_names = []
         for task_name, task_info in self._data.iteritems():
-            if task_info.get('type') == 'task':
+            if task_info.get(const.DATA_TYPE_ID) == const.TASK_DATA_TYPE:
                 task_names.append(task_name)
         return task_names
 
@@ -45,13 +70,13 @@ class Scene():
         """Return dict of data for a task."""
         try:
             task_info = self._data[task_name]
-            if task_info.get('type') == 'task':
+            if task_info.get(const.DATA_TYPE_ID) == const.TASK_DATA_TYPE:
                 return task_info
             return {}
         except KeyError:
             return {}
 
-    def create_or_update_task(self, task_name, author, notes, app_data):
+    def create_task(self, task_name, author, notes, app_data):
         """
         Create a new task in the scene.
 
@@ -62,18 +87,25 @@ class Scene():
             app_data(dict): Application specific dict with information about the files in this checkin.
                 Should be structured like {app_name: { app_data=app_data }}
         """
+        if task_name in self._data.keys():
+            raise RuntimeError("Unable to create task. Task already exists.")
         new_task_obj = Task(task_name,
                             author,
                             notes=notes)
         for app_name, app_info in app_data.iteritems():
             new_task_obj.add_application(app_name,
-                                         app_info['scene'],
-                                         additional_supporting_files=app_info.get('supporting_files', {}))
-        self.tasks.append(new_task_obj)
+                                         app_info[const.SCENE_FILE],
+                                         additional_supporting_files=app_info.get(const.SUPPORT_FILES, {}))
+        self._data[task_name] = new_task_obj
 
-    def _validate(self):
-        """Ensure this scene is valid. Raise exception if not valid."""
-        return True
+    def export(self, filepath):
+        export_dict = {}
+        for data_key, info in self._data.iteritems():
+            if type(info) == Task:
+                export_dict[data_key] = info._export()
+            else:
+                export_dict[data_key] = info
+
 
 class Task():
     """Represents something someone has done that has files associated with it."""
@@ -100,5 +132,21 @@ class Task():
         :param additional_supporting_files: Files that are referenced by the main source file.
         """
 
-        self.application_info[application_name] = {"scene": scene_file,
-                                                   "supporting_files": additional_supporting_files}
+        self.application_info[application_name] = {const.SCENE_FILE: scene_file,
+                                                   const.SUPPORT_FILES: additional_supporting_files}
+
+    def _export(self):
+        """
+        Export a dict containing the data needed in the shotfile.
+
+        :return: Dict containing information about this task.
+        """
+        if not self.date:
+            self.date = datetime.datetime.utcnow()
+
+        export_info = {const.AUTHOR: self.author,
+                       const.NOTES: self.notes,
+                       const.DATE: self.date,
+                       const.APP_FILES: self.application_info,
+                       const.DATA_TYPE_ID: const.TASK_DATA_TYPE}
+        return export_info
